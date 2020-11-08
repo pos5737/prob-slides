@@ -8,8 +8,13 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
 ```
 
+## Revisions
+
+You can find the latest versions of the slides in their [GitHub repo](https://github.com/pos5737/prob-slides). If you have any suggestions, feel free to [open an issue ticket](https://github.com/pos5737/prob-slides/issues).
 
 # Basics
 
@@ -86,6 +91,10 @@ $\Pr(\emptyset) = 0$.
 Prove Theorem \ref{thm:empty-zero}. Hint: Use Axiom \ref{axm:3}.
 \end{Exercise}
 
+**Solution**
+
+$\Pr(\emptyset) = \Pr(\cup_{i = 1}^\infty \emptyset) = \sum_{i = 1}^\infty \Pr(\emptyset)$. $\Pr(\emptyset) = \sum_{i = 1}^\infty \Pr(\emptyset)$ iff $\Pr(\emptyset) = 0$.
+
 ##
 
 
@@ -114,6 +123,10 @@ If events $A \subseteq B$, then $\Pr(A) \leq \Pr(B)$.
 Prove Theorem \ref{thm:monotonicity}. Hint: Notice that $B = A \cup (B \cap A^c)$. Then use the Additional Rule for Two Disjoint Events (Corollary \ref{cor:addition-rule}).
 \end{Exercise}
 
+**Solution**
+
+$B = A \cup (B \cap A^c)$. By the addition rule for disjoint events, $\Pr(B) = \Pr(A) + \Pr(B \cap A^c)$. By Axiom 1, $\Pr(B \cap A^c) \geq 0$, so $\Pr(A) \leq \Pr(B)$.
+
 ##
 
 \begin{thm}\label{thm:bounds}
@@ -123,6 +136,10 @@ For event $A$, $0 \leq \Pr(A) \leq 1$.
 \begin{Exercise}
 Prove Theorem \ref{thm:bounds}. Hint: Axiom \ref{axm:1} established that $0 \leq \Pr(A)$. Now show that $\Pr(A) \leq 1$. To do this, use Axiom \ref{axm:2} and Theorem \ref{thm:monotonicity}.
 \end{Exercise}
+
+**Solution**
+
+$A \subseteq S$. $\Pr(A) \leq \Pr(S)$. By Axiom 1, $\Pr(S) = 1$, so $\Pr(A) \leq 1$.
 
 ##
 
@@ -145,11 +162,19 @@ For any events $A$, $B$, and $C$,
 If they answer honestly and accurately, a randomly selected survey respondent will report voting in the 2016 presidential election with probability 0.6. What's the probability that a randomly selected survey respondent will report not voting. Make sure to connect your answer to the results above. Hint: show that $\Pr(A^c) = 1 - \Pr(A)$. We haven't established this simple, intuitive result. Then use this result to answer the question.
 \end{Exercise}
 
+**Solution**
+
+$\Pr(S) = \Pr(A) + \Pr(A^c)$. Then $1 = \Pr(A) + \Pr(A^c)$ and $\Pr(A^c) =  1-  \Pr(A)$. Then $\Pr(\text{non-voter}) = 0.4$.
+
 ##
 
 \begin{Exercise}
 Suppose events $A$ and $B$, where $\Pr(A) = 0.5$ and $\Pr(B) = 0.8$. Without more information, you can't figure out $\Pr(A \cap B)$, but you can bound it. What is the largest possible value of $\Pr(A \cap B)$? What's the smallest?
 \end{Exercise}
+
+**Solution**
+
+Remember that $\Pr(A \cap B) = \Pr(A)\Pr(B \mid A)$. Because $A$ is smaller than $B$, it could be that all of $A$ is inside $B$, in which case $\Pr(B \mid A) = 1$ and $\Pr(A \cap B) = \Pr(A) = 0.5$. Or it could be that $\Pr(B \mid A^c) = 1$, in which case $\Pr(B \cap A^c) = \Pr(B \mid A^c) \Pr(A^c) = 1 \times 0.5 = 0.5$. Then $\Pr(B) = \Pr(B \cap A^c) + \Pr(B \cap A) = 0.8$, according to the Addition Rule for Disjoint Events (that's a "partition, see below). So we have $.5 + \Pr(B \cap A)  = 0.8$ or $\Pr(B \cap A) = 0.3$.
 
 ##
 
@@ -221,11 +246,19 @@ Simplify $\Pr(A \mid B)$ for the following scenarios. Connect your answers to th
   \end{enumerate}
 \end{Exercise}
 
+**Solution**
+
+(1) $\Pr(A)/\Pr(B)$, (2) 0, (3) not defined, (4) $\Pr(A)\Pr(B)$
+
 ##
 
 \begin{Exercise}
 Voting is a habit. Suppose that elections occur every four years and a hypothetical voter can vote in their first election at 18 in 2020. They vote in their first election with probability 0.5. If they voted in the last election, then they vote in the next election with probability 0.8. If they abstained in the last election, then they vote in the next election with probability 0.3. What is the probability that they vote in their first three election (i.e., vote, then vote, then vote)? What the probability that they abstain in their first three elections (i.e., abstain, then abstain, then abstain)? What's the probability that they either vote or abstain in their first three elections (i.e., [vote, then vote, then vote] \textit{OR} [abstain, then abstain, then abstain])?
 \end{Exercise}
+
+**Solution**
+
+$0.5 \times 0.8 \times 0.8$; $0.5 \times 0.7 \times 0.7$; the sum of the two previous
 
 
 ## 
@@ -250,11 +283,36 @@ The "every subset'" part of Definition \ref{dfn:independence-n} is subtle, so le
 Suppose $A$ and $B$ are independent and $\Pr(B) < 1$. Find $\Pr(A^c | B^c)$ in terms of $A$ and $B$. Prove that $A^c$ and $B^c$ are independent.
 \end{Exercise}
 
+**Solution**
+
+\scriptsize
+
+First, show that $A^c$ and $B^c$ are independent. 
+
+\begin{align*}
+\Pr(A^c \cap B^c) & = \Pr([A \cup B]^c) \\
+                  & = 1 - \Pr(A \cup B) \\
+                  & = 1 - [\Pr(A) + \Pr(B) - \Pr(A \cap B)] \\
+                  & = 1 - \Pr(A) - \Pr(B) + \Pr(A)\Pr(B) \\
+                  & = [1 - \Pr(A)] \times [1 - \Pr(B)] \\
+                  & = \Pr(A^c) \times \Pr(B^c)
+\end{align*}
+
+Then, by independence, we know that $\Pr(A^c | B^c) = \Pr(A^c)$ and that $\Pr(A^c) = 1 - \Pr(A)$.
+
+
+##
+
 
 \begin{Exercise}
 Suppose $A$ and $B$ are events and $\Pr(B) = 0$. ($A$ is any event.) Find $\Pr(A \cap B)$. Prove that $A$ and $B$ are independent.
 \end{Exercise}
 
+**Solution**
+
+If $A$ and $B$ are independent, then $\Pr(A \cap B) = \Pr(A) \Pr(B)$. Well, if $\Pr(B) = 0$, then $\Pr(A \cap B)$ must be zero. If the chance of $B$ is zero, then the chance of $A$ and $B$ is zero. Thus the two sides are equal and therefore independent.
+
+##
 
 \begin{Exercise}
 Suppose a six-die is rolled 10 times. What's the probability of...
@@ -264,6 +322,10 @@ Suppose a six-die is rolled 10 times. What's the probability of...
   \item all not-sixes?
   \end{enumerate}
 \end{Exercise}
+
+**Solution**
+
+(1) $(1/6)^{10}$, (2) $1 - (1/6)^{10}$, (3) $(5/6)^{10}$
 
 
 ##
@@ -303,4 +365,416 @@ Suppose the simple partition $B$ and $B^c$ of the sample space $S$ where $\Pr(B)
 
 \begin{Exercise}\label{exr:bayes-rule}
 You're considering getting tested for a rare disease that 1 in 100,000 people have. If given to a person with the disease, the test will produce a positive result 99\% of the time. If given to a person without the disease, the test will produce a positive result 0.1\% of the time (i.e., 1 in 1,000). You are given the test and the result comes back positive. Use Bayes' rule to compute the chance that you have the disease. 
+\end{Exercise}
+
+# Random Variables
+
+## Supplemental Readings
+
+- Aronow and Miller, section 1.2, pp. 15-30
+- DeGroot and Schevish, sections 3.1 to 3.3, pp. 93-117
+
+##
+
+\begin{dfn}
+A \textbf{random variable} is a real-valued function defined on the sample space $S$.
+\end{dfn}
+
+\small
+
+Consider tossing a coin twice. The sample space $S$ consists of the outcomes $\{HH, TH, HT, TT\}$. We can create the random variable $X$ by mapping $HH$ to 2, $TH$ and $HT$ to 1, and $TT$ to zero---we count the number of heads.
+
+\begin{table}[!h]
+\begin{tabular}{ll}
+Outcome or $o$ & Value $x$ of $X$ or $X(o)$ \\
+$HH$        & 2      \\
+$HT$        & 1      \\
+$TH$        & 0     
+\end{tabular}
+\end{table}
+
+We tend to equate the function $X$ with the outcomes of the experiment. In this case, we would imagine 2 rather than $HH$, e.g., as the outcome of the experiment so that $X(x) = I(x) = x$. That's fine. We simply require that a random variable $X$ take on real-values that map from the sample space $S$ and possible just the real-values in the sample space.
+
+##
+
+\begin{dfn}
+The \textbf{distribution} of random variable $X$ is is the collection of all probabilities $\Pr(X \in C)$ for all sets $C$ of real numbers such that $X \in C$ is an event. 
+\end{dfn}
+
+## Discrete Distributions
+
+\begin{dfn}\label{dfn:discrete}
+Random variable $X$ has a \textbf{discrete distribution} (or ``is discrete'') if either (a) $X$ can take on only a finite number of values $\{x_1, x_2, ... , x_n\}$ or (b) an infinite sequence of different values $\{x_1, x_2, x_3, ...\}$.
+\end{dfn}
+
+Part (b) of Definition \ref{dfn:discrete} is subtle. It is crucial that you can arrange the values that $X$ can take on into a \textit{sequence}. That is, a first value, a second value, etc., that reaches all the possibilities. We can arrange all the positive integers into the sequence $\{1, 2, 3, ...\}$, all the integers into the sequence $\{0, -1, 1, -2, 2, -3, 3, ...\}$. Perhaps somewhat surprising, the rational numbers can be arranged into a sequence as well. One cannot arrange the real numbers $\mathbb{R}$ into a sequence or arrange numbers in the interval $[0, 1]$ into sequence.
+
+## Discrete Distributions
+
+\begin{dfn}[pmf]
+For a discrete random variable $X$, the \textbf{probability mass function} (pmf) is the function $f(x) = \Pr(X = x)$ for every real number $x$. As a short hand for ``$X$ has pmf $f(x)$, we write $X \sim f(x)$.
+\end{dfn}
+
+Some authors refer to the pmf as the ``probability function.''
+
+## Discrete Distributions
+
+\begin{thm}\label{thm:pmf1}
+Let $f$ represent the pmf of a discrete random variable $X$. If the set of possible values of $X$ does not include $x$, then $f(x) = 0$.  If the sequence $x_1, x_2, ... , x_n$ includes \textit{all} the possible values of $X$, then $\sum_{i = 1}^n f(x_i) = 1$.
+\end{thm}
+
+\begin{thm}
+Let $f$ represent the pmf of a discrete random variable $X$. The probability of each subset $C$ of the real line is $\Pr(X \in C) = \displaystyle \sum_{x_i \in C} f(x_i)$.
+\end{thm}
+
+## Discrete Distributions
+
+\begin{exa}[Bernoulli Distribution]
+A Bernoulli random variable $X$ (or ``a random variable $X$ with the Bernoulli distribution) has support $\{0, 1\}$ and $Pr(X = 1) = \pi$. We can write the pmf as 
+\begin{equation}
+f(x) =
+  \begin{cases}
+    \pi      & \quad \text{if } x =1\\
+   1 - \pi & \quad \text{if } x = 0\\
+   0 		& \quad \text{otherwize}
+  \end{cases}, \nonumber
+\end{equation}
+
+\noindent or equivalently as  $f(x) = \pi^x(1 - \pi)^{(1 - x)}$ for $x \in \{0, 1\}$ (and 0 otherwise). Note that we often leave the ``and 0 otherwise'' implicit, but it matters. Understanding the Bernoulli distribution, we can now write a Bernoulli random variable $X$ as $X \sim \text{Bernoulli}(\pi)$. 
+\end{exa}
+
+## Discrete Distributions
+
+Each "distribution" (the Bernoulli, binomial, Poisson, geometric, normal, exponential, Cauchy, etc) is actually a *family* of distributions. It's a "family" because it has parameters that can vary.
+
+For example, the Bernoulli distribution has the parameter $\pi \in [0, 1]$ that allows $\Pr(X = 1)$ to vary. If we set $\pi = 0.3$, then $\Pr(X = 1) = 0.3$. The ideas is that there are *lots of different Bernoullis*, one for each value of $\pi$. Depending on the context, you might choose a particular value (e.g., let $\pi = 0.3$), leave it arbitrary, or try to estimate it. 
+
+The key point is this: **distributions have parameters that allow them to represent different random variables**. By varying the parameters, you vary the distribution. 
+
+## Discrete Distributions
+
+\begin{exa}[Uniform Distribution on the Integers $a$ to $b$]
+A uniform random variable $X$ on the integers $a, ..., b$ has the pmf $f(x) = \frac{1}{b - a + 1}$ for $x = a, ..., b$ (and 0 otherwise).
+\end{exa}
+
+
+The parameters $a$ and $b$ vary the integers over which the distribution varies. We can make it vary from -10 to 10, 1 to 6, or 1 to 100... whatever we like.
+
+## Discrete Distributions
+
+\small
+
+\begin{exa}[Geometric Distribution]
+Imagine tossing a possibly-biased coin until you obtain a head. Let the $\pi$ represent the probability of head for on each toss. Let $X$ represent the number of tosses. (In this case, we can understand each toss as $Z \sim \text{Bernoulli}(\pi)$). The table below shows the probability of several valures of $x$ computed using the multiplication rule.
+\begin{center}
+\begin{tabular}{ccc}
+Outcome & $x$ & Probability \\
+$H$ & 1 &  $\pi$ \\
+$TH$ & 2 & $(1 - \pi) \pi$ \\
+$TTH$ & 3 & $(1 - \pi)^2 \pi$\\
+$TTTH$ & 4 & $(1 - \pi)^3 \pi$\\
+$TTTTH$ & 5 & $(1 - \pi)^4 \pi$\\
+ & \vdots & \\
+ $\underbrace{TT...TT}_{x - 1 \text{ tails}}H$ & x & $(1 - \pi)^{(x - 1)} \pi$\\
+\end{tabular}
+\end{center}
+We can see that $\Pr(X = x) = f(x) = (1 - \pi)^{(x - 1)} \pi$ for $x \in \{1, 2, ...\}$ and 0 otherwise. We refer to this distribution as the geometric distribution, so we can now write $X \sim \text{geometric}(\pi)$.
+\end{exa}
+
+## Discrete Distributions
+
+\small
+
+\begin{Exercise}
+$X$ has a uniform distribution on the integers $10, ..., 20$. Write the pmf of $X$. What's the probability that $X$ is even? Odd? Prime? Not 20? Represent your answers with summation notation before finding the numeric probability.
+\end{Exercise}
+
+\begin{Exercise} 
+Suppose I have a box with the tickets $\{-17, 1, 1, 1, 2, 3, 23.3, \pi\}$. I draw one ticket at random and record the number on the ticket. Write down the pmf that corresponds to this experiment.
+\end{Exercise}
+
+\begin{Exercise}
+Verify that the Bernoulli pmf $f(x) = \pi^x (1 - \pi)^{(1 - x)}$ for $x \in \{0, 1\}$ (and 0 otherwize) is a pmf. This requires two things. First, show that $f(x) \geq 0$ for $x \in \mathbb{R}$. Second, show that $\sum_{\text{support of }X} f(x) = 1$.
+\end{Exercise}
+
+## Discrete Distributions
+
+\begin{Exercise} (Hard) 
+Verify that the geometric pmf $f(x) = (1 - \pi)^{(x - 1)} \pi$ for $x \in \{1, 2, ...\}$ (and 0 otherwise)is a pmf. It's easy to show that $f(x) \geq 0$ for $x \in \mathbb{R}$. It's much trickier to show that $\sum_{\text{support of }X} f(x) = 1$. You need to know something about a geometric series.
+\end{Exercise}
+
+\begin{Exercise}
+$X$ has the pmf $f(x) = cx$ for $x \in \{1, 2, 3, 4, 5\}$ (and 0 otherwise). Find $c$. Hint: Use Theorem \ref{thm:pmf1} and make the pmf sum to 1.
+\end{Exercise}
+
+## Discrete Distributions in R
+
+R offers a collection of pmfs to use. These always/usually start with a `d`. As an example, here's the pmf for the geometric distribution, with the parameter $\pi$ (i.e., the probability of success) equal to 0.5.
+
+Unfortunately, there are a couple of different parameterizations of the geometric. The version we discussed above treats *the number of trials until a success* as the outcome. The other treats  *number of failures until* until a success. R uses the second parameterization Fortunately, the former is always one plus the latter.
+
+```{r echo=TRUE}
+# the chance of it taking 5 tosses to obtain a head
+# (alternatively, the chance of getting 4 tails 
+# before the first head)
+dgeom(4, prob = 0.5)
+```
+
+## Discrete Distributions in R
+
+\small
+
+```{r echo=TRUE, fig.height=2, fig.width=3}
+ooi <- 0:10                  # outcomes of interest
+p <- dgeom(ooi, prob = 0.5)  # probability of ooi
+
+round(p, 3)
+```
+
+## Discrete Distributions in R
+
+```{r echo=TRUE, fig.height=2, fig.width=3}
+qplot(x = ooi, y = p, geom = "col")
+```
+
+## Discrete Distributions in R
+
+\footnotesize
+
+The binomial distribution models the sum of a series of $n$ Bernoulli trials. It's like the number of heads if you toss a coin 10 times. Or the number of sixes if you roll a die 20 times.
+
+```{r echo=TRUE}
+# binomial(10, 0.5); number of H if you toss a fair coin 10x
+dbinom(7, size = 10, prob = 0.5)  # Pr(7)
+dbinom(8, size = 10, prob = 0.5)  # Pr(8)
+dbinom(9, size = 10, prob = 0.5)  # Pr(8)
+```
+
+If you set the number of trials to `size = 1`, the you have a Bernoulli distribution
+
+```{r echo = TRUE}
+# for size = 1, we have a Bernoulli
+dbinom(1, size = 1, prob = 0.7)   # Pr(1)
+```
+
+## Discrete Distributions in R
+
+\small
+
+We can also use the `r` version of the distribution functions to *simulate*.
+
+```{r echo=TRUE}
+# 5 values from geometric(0.3)
+rgeom(5, prob = 0.3)
+
+# 3 values from binomial(100, 0.5)
+rbinom(5, size = 100, prob = 0.3)
+
+# 10 values from Bernoulli(0.5)
+rbinom(10, size = 1, prob = 0.5)
+```
+
+
+
+## Continuous Distributions
+
+\begin{dfn}\label{dfn:continuous}
+Random variable $X$ has a \textbf{continuous distribution} (or ``is continuous'') if there exists a non-negative, real function $f$ such that $\Pr(X \in C) \int_C f(x)$ for every interval of real-valued numbers $C$.
+\end{dfn}
+
+To help make sense of Definition \ref{dfn:continuous}, the table below shows a few sets $C$ and its associated interval.
+
+\begin{footnotesize}
+\begin{center}
+\begin{tabular}{ccc}
+$C$ & Probability & Integral \\
+$[a, b]$ for $a < b$ & $\Pr(a \leq X \leq b)$ & $  \int_a^b f(x) dx$\\
+$[\infty, b]$ & $\Pr(X \leq b)$ &$ \int_\infty^b f(x) dx$\\
+$[a, \infty]$ & $\Pr(X \geq a)$ & $ \int_a^\infty f(x) dx$\\
+\end{tabular}
+\end{center}
+\end{footnotesize}
+
+\begin{dfn}\label{dfn:pdf}
+We refer to the function $f$ from Definition \ref{dfn:continuous} as the \textbf{probability density function} (pdf) of $X$. 
+\end{dfn}
+
+## Continuous Distributions
+
+\begin{thm}
+Let $f$ represent the pdf of $X$. $f(x) \geq 0$ for all $x$ and $\int_{-\infty}^\infty f(x) dx = 1$.
+\end{thm}
+
+\begin{dfn}
+For a pmf or pdf $f$, refer to the set of values $x$ such that $f(x) > 0$ as the \textbf{support} of $X$. 
+\end{dfn}
+
+The support refers to the possible values of $X$. For example, the support of a geometric random variable is $\{1, 2, 3, ...\}$. The support of a uniform distribution on the interval $[a, b]$ is $[a, b]$.
+
+## Continuous Distributions
+
+\begin{exa}[Uniform Distribution on the Interval $a$ to $b$]
+A uniform random variable $X$ on the interval $[a, b]$ has the pdf $f(x) = \frac{1}{b - a}$ for $a \leq x \leq b$ (and 0 otherwise).
+\end{exa}
+
+## Continuous Distributions
+
+\small
+
+\begin{exa}[Logistic Distribution]
+The (standard) logistic distribution has pdf $f(x) = \dfrac{e^{-x}}{(1 - e^{-x})^2}$. For a logistic random variable $X$, 
+\begin{align*}
+\Pr(0 \leq x \leq 1) &= \int_0^1 f(x) dx\\
+&= \int_0^1 \dfrac{e^{-x}}{(1 - e^{-x})^2} dx\\
+&= \frac{1}{1 + e^{-x}} \bigg\rvert_0^1 \\
+&= \frac{1}{1 + e^{-1}} - \frac{1}{1 + e^{0}} \\
+&= \frac{1}{1 + e^{-1}} - \frac{1}{2} \\
+& \approx 0.23
+\end{align*}
+\end{exa}
+
+## Continuous Distributions: Plotting with R
+
+\footnotesize
+
+We can use R to plot the pdf of the standard logistic distribution.
+
+```{r echo = TRUE, fig.height = 2, fig.width = 3}
+from <- -5
+to <- 5
+
+data <- data.frame(x = seq(from, to, length.out = 100)) %>%
+  mutate(density = dlogis(x))
+
+ggplot(data, aes(x = x, y = density)) + 
+  geom_line()
+```
+
+## 
+
+
+\begin{Exercise}
+The exponential distribution has pdf $f(x) = \lambda e^{-\lambda x}$. We can think of the lifespan $L$ of a light bulb (in years) as following an exponential distribution with $\lambda = 0.25$. (Or we might write $L \sim \text{exponential}(0.25)$}). Find $\Pr(1 < L < 5)$ (i.e., the probability that a light bulb last between one and five years). Hints: First, don't worry about whether the inequalities are strict or not--these point have probability zero, so it doesn't matter. Second, remember that $\Pr(1 < L < 5) = \int_1^5  0.25 e^{-0.25 x}$.
+\end{Exercise}
+
+##
+
+\begin{Exercise}
+I've invented a new distribution called the ``triangle distribution.'' It's $f(x) = x$ for $x \in [0, 1]$ (and 0 otherwise), so it's shaped like a right-triangle. Unfortunately, the area under the pdf is 0.5, not 1. So I need to add a normalizing constant $c$, so that $f(x) = cx$. Find $c$ so that my triangle distribution is actually a pdf (integrates to one.) Be sure to show that $\int_{-\infty}^\infty f(x) dx = 1$ for your chosen value of $c$. 
+\end{Exercise}
+
+```{r fig.height = 2, fig.width = 3}
+x <- seq(-1, 2, by = 0.01)
+f <- function(x) ifelse(x < 1 & x > 0, x, 0)
+prob <- f(x)
+d <- tibble(x, prob)
+ggplot(d, aes(x = x, y = prob)) + 
+  geom_line()
+```
+
+##
+
+\begin{Exercise}
+For the triangle distribution in the previous question (the corrected version that integrates to one), find $\Pr(X < 0.25)$. Find $\Pr(X > 0.5)$.
+\end{Exercise}
+
+## 
+
+\begin{Exercise}
+The beta distribution is a weird little distribution defined over the $[0, 1]$ interval. The pdf for the beta distribution is $f(x) = \dfrac{x^{\alpha - 1}(1 - x)^{\beta - 1}}{B(\alpha, \beta)}$. (Here, $B()$ is the ``beta function.'' It's ``just'' a normalizing constant here, so not critical to know, but feel free to Google it). Use the \texttt{dbeta()} function in R to plot the pdf for different values of $\alpha$ (\texttt{shape1} argument) and $\beta$ (\texttt{shape2} argument). What happens when you make both parameters large (> 10)? What about when you make both small (< 1)?
+\end{Exercise}
+
+## CDFs
+
+\begin{dfn}[cdf]
+The \textbf{cumulative distribution function} (cdf)  $F$ of a random variable $X$ is $F(x) = \Pr(X \leq x)$ for $-\infty < x < \infty$.
+\end{dfn}
+
+\begin{dfn}[cdf of a Discrete Distribution]
+For a discrete random variable $X$ with pmf $f(x)$, $F(x) = \sum_{t \leq x} f(t)$.
+\end{dfn}
+
+\begin{dfn}[cdf of a Continuous Distribution]
+For a continuous random variable $X$ with pdf $f(x)$, $F(x) = \int_{-\infty}^x f(t)dt$.
+\end{dfn}
+
+## CDFs
+
+Notice four things:
+\begin{enumerate}
+\item $F(x)$ is non-decreasing.
+\item $\lim_{x \to -\infty} F(x) = 0$.
+\item $\lim_{x \to \infty} F(x) = 1$.
+\item $F(x)$ is continuous from the right.
+\end{enumerate}
+
+\begin{thm}
+$\Pr(X > x) = 1 - F(x)$ for all $x$.
+\end{thm}
+\begin{thm}
+$\Pr(x_1 < X \leq x_2) = F(x_2) - F(x_1)$ for all $x_2 > x_1$.
+\end{thm}
+
+##
+
+\begin{Exercise}
+Sketch the cdf of the Bernoulli distribution.
+\end{Exercise}
+
+\begin{Exercise}
+Sketch the cdf of the geometric distribution. (You don't need to go all the way to $x = \infty$, but get $\Pr(X \leq x)$ close to one.)
+\end{Exercise}
+
+\begin{Exercise}
+Suppose I'm going to sample once from a box with five tickets. The ticket are numbered with 1, 2, 3, 3, and 7. Write the pmf as a stepwise function. Sketch the cdf.
+\end{Exercise}
+
+##
+
+\begin{Find the cdf for the triangle distribution we derived above. Use the cdf to find: (a) $\Pr(X \leq 0.25)$, $\Pr(X > 0.5)$, and $\Pr(0.25 \le X )$}
+
+
+
+##
+
+
+\scriptsize
+
+
+\begin{Exercise}
+
+
+Browse Wikipedia's list of probability distributions. Find a \textit{discrete distribution with finite support} that seems interesting. 
+
+\begin{enumerate}
+\item Summarize it verbally (i.e., ``it's like the number of tosses required to get a head'').
+\item Write down the pmf. Are there different versions or parameterizations?
+\item Does R have the \texttt{d} function to compute probabilities? If so, compute a few to test it out. You might need to find a package. Or the function might not exist.
+\item Write down the cdf. 
+\item Does R have the \texttt{p} function to compute (cumulative) probabilities? If so, compute a few to test it out. You might need to find a package. Or the function might not exist.
+\item Does R have the \texttt{r} function to simulate from the distribution? If so, simulate 1,000 draws for a particular set of parameters and use \texttt{geom\_bar()} to draw a bar plot of the simulations. Repeat for a different set of parameters.
+\end{enumerate}
+
+Repeat for a \textit{discrete distribution with infinite support}.
+
+\end{Exercise}
+
+##
+
+\scriptsize
+
+
+\begin{Exercise}
+
+Browse Wikipedia's list of probability distributions. Find a \textit{continuous distribution} that seems interesting. 
+
+\begin{enumerate}
+\item Summarize it verbally, if you can. Continuous distributions might not have a good verbal description, but you can at least describe the shape of the pdf.
+\item Write down the pdf. Are there different versions or parameterizations?
+\item Does R have the \texttt{d} function to compute the density for particular outcomes? If so, compute a few to test it out. You might need to find a package. Or the function might not exist. Realize that these are not probabilities---in order to turn the densities into probabilities, you must integrate them over and interval.
+\item Write down the cdf. 
+\item Does R have the \texttt{p} function to compute (cumulative) probabilities? If so, compute a few to test it out. You might need to find a package. Or the function might not exist. These are probabilities---the integration is already done (that's where the cdf comes from).
+\item Does R have the \texttt{r} function to simulate from the distribution? If so, simulate 1,000 draws for a particular set of parameters and use \texttt{geom\_histogram()} to draw a histogram of the simulations. Repeat for a different set of parameters.
+\end{enumerate}
+
 \end{Exercise}
