@@ -376,7 +376,6 @@ You're considering getting tested for a rare disease that 1 in 100,000 people ha
 
 ##
 
-\begin{dfn}
 A \textbf{random variable} is a real-valued function defined on the sample space $S$.
 \end{dfn}
 
@@ -650,11 +649,11 @@ ggplot(data, aes(x = x, y = density)) +
   geom_line()
 ```
 
+
 ## 
 
-
 \begin{Exercise}
-The exponential distribution has pdf $f(x) = \lambda e^{-\lambda x}$. We can think of the lifespan $L$ of a light bulb (in years) as following an exponential distribution with $\lambda = 0.25$. (Or we might write $L \sim \text{exponential}(0.25)$}). Find $\Pr(1 < L < 5)$ (i.e., the probability that a light bulb last between one and five years). Hints: First, don't worry about whether the inequalities are strict or not--these point have probability zero, so it doesn't matter. Second, remember that $\Pr(1 < L < 5) = \int_1^5  0.25 e^{-0.25 x}$.
+The exponential distribution has pdf $f(x) = \lambda e^{-\lambda x}$. We can think of the lifespan $L$ of a light bulb (in years) as following an exponential distribution with $\lambda = 0.25$. (Or we might write $L \sim \text{exponential}(0.25)$). Find $\Pr(1 < L < 5)$ (i.e., the probability that a light bulb last between one and five years). Hints: First, don't worry about whether the inequalities are strict or not--these point have probability zero, so it doesn't matter. Second, remember that $\Pr(1 < L < 5) = \int_1^5  0.25 e^{-0.25 x}$.
 \end{Exercise}
 
 ##
@@ -731,7 +730,9 @@ Suppose I'm going to sample once from a box with five tickets. The ticket are nu
 
 ##
 
-\begin{Find the cdf for the triangle distribution we derived above. Use the cdf to find: (a) $\Pr(X \leq 0.25)$, $\Pr(X > 0.5)$, and $\Pr(0.25 \le X )$}
+\begin{Exercise}
+Find the cdf for the triangle distribution we derived above. Use the cdf to find: (a) $\Pr(X \leq 0.25)$, $\Pr(X > 0.5)$, and $\Pr(0.25 \le X )$.
+\end{Exercise}
 
 
 
