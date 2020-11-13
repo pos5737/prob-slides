@@ -782,7 +782,6 @@ Browse Wikipedia's list of probability distributions. Find a \textit{continuous 
 
 # More on Random Variables
 
-
 ## Review
 
 - A **random variable** is like drawing a numbered ticket from a hat.
@@ -791,8 +790,6 @@ Browse Wikipedia's list of probability distributions. Find a \textit{continuous 
 - Or we can define a random variable with a **cumulative distribution function** $F(x)$, so that $\Pr(X \leq x) = F(x)$.
 
 Essentially, the pmf/pdf/cdf tells us how likely we are to draw certain numbers from the hat.
-
-##
 
 \begin{dfn}
 The \textbf{expected value} $E(X)$ (or ``\textbf{mean}'') of a random variable $X$ is defined as follows:
@@ -997,7 +994,7 @@ Suppose random variables $X$ and $Y$ so that $V(X)$ and $V(Y)$ exist. Suppose co
  \begin{enumerate}
  \item $V(b) = 0$.
  \item $V(X + b) = V(X)$.
- \item $V(aX) = a^2 E(X)$.
+ \item $V(aX) = a^2 V(X)$.
  \end{enumerate}
 \item $V(X + Y) = V(X) + V(Y)$ if $X$ and $Y$ are indepedent.
 \item $V(X + Y) = V(X) + V(Y) + 2\text{Cov}(X, Y)$.
@@ -1026,7 +1023,7 @@ Our usual, univariate random variables give us a single number or "scalar" for e
 library(mvtnorm)
 
 # mean vector
-# E(X1) = -2; E(X2) = 3
+# E(X1) = -2; E(X2) = 15
 mu <- c(-2, 15); mu
 
 # variance matrix // covaraince matrix
@@ -1116,7 +1113,7 @@ The **covariance** of $X$ and $Y$ (analogous to the variance) is $\text{Cov}(X, 
 
 The **correlation** of $X$ and $Y$ is $\rho(X, Y) = \frac{\text{Cov}(X, Y)}{V(X)V(Y)}$.
 
-## Multivariaet Distributions, Briefly
+## Multivariate Distributions, Briefly
 
 For a bivariate normal distribution, the marginal and conditional distributions have really easy formulas.
 
@@ -1133,7 +1130,7 @@ A sequence of random variables $Z_1, Z_2, ..., Z_n$ with pdfs or pmfs $g_1, g_2,
 \end{dfn}
 
 \begin{thm}[(Weak) Law of Large Numbers]
-Suppose a sequence of i.i.d. random variables $X_1, X_2, ..., X_n$ are each an i.i.d. random sample from a distribution with expected value $\mu$ and finite variance $\sigma^2$. If $\overline{X}_n$ denotes the average of the $n$ samples, then $\overline{X}_n \overset{p}{\to} \mu$.
+Suppose a sequence of i.i.d. random variables $X_1, X_2, ..., X_n$ from a distribution with expected value $\mu$ and finite variance $\sigma^2$. If $\overline{X}_n$ denotes the average of the $n$ samples, then $\overline{X}_n \overset{p}{\to} \mu$.
 \end{thm}
 
 ## Law of Large Numbers
@@ -1160,6 +1157,14 @@ mean(x)  # avg of simulations
 
 \begin{Exercise}
 Use \texttt{draws <- rexp(100000, rate = 0.1)} to take a large number of draws from $\text{exponential}(0.1)$. Then compute the average-of-the-squares \texttt{mean(draws\string^2)} and the square-of-the-average \texttt{mean(draws\string^2}. Are these the same or different? Connect this simulation result to Jensen's inequality.
+\end{Exercise}
+
+\begin{Exercise}
+Let $\overline{X}_n$ represent the average of $n$ draws from a Bernoulli distribution.  $\overline{X}_n$ converges in distribution to what value? Confirm with a simulation for a couple of different values of $\pi$ (just make your samples as large as your computer can quickly handle).
+\end{Exercise}
+
+\begin{Exercise}
+Let $\overline{X}_n$ represent the average of $n$ draws (w/ replacement) from a hat with tickets numbered 1, 2, 3, 3, 3, and 8.  $\overline{X}_n$ converges in distribution to what value? Confirm with a simulation.
 \end{Exercise}
 
 ## Central Limit Theorem
@@ -1193,7 +1198,7 @@ We can think of the CLT in several different ways.
 
 Implication: If we have a large number of draws and know the expected value and variance of each draw, then we know (approximately) the distribution of the average (and sum) of the draws.
 
-Note: FPP refer to $n\mu$ as the ``expected value (for the sum)'' and $\sqrt{n \sigma^2} = \sqrt{n} \sigma$ as the ``standard error (SE) (for the sum).''
+Note: FPP refer to $n\mu$ as the "expected value (for the sum)" and $\sqrt{n \sigma^2} = \sqrt{n} \sigma$ as the "standard error (SE) (for the sum)."
 
 ## Illustration of the Central Limit Theorem
 
@@ -1340,5 +1345,29 @@ ggplot(sims, aes(x = std_avg)) +
                 color = "red", size = 0.5)
   
 ```
+
+##
+
+\begin{Exercise}
+Let $\overline{X}$ represent the average of $1,000$ draws from a Bernoulli distribution. The average  $\overline{X}$ is itself a random variable, but approximately follows a \_\_\_\_\_\_\_\_ distribution with mean \_\_\_\_\_\_\_\_ and variance \_\_\_\_\_\_\_\_ (or SD \_\_\_\_\_\_\_\_). Hint: See the slide that gives several version of the CLT, and use the one that tells you what the average converges to. 
+\end{Exercise}
+
+##
+
+\begin{Exercise}
+Let $\sum X$ represent the sum of $1,000$ draws from an exponential distribution. The sum  $\sum X$ is itself a random variable, but approximately follows a \_\_\_\_\_\_\_\_ distribution with mean \_\_\_\_\_\_\_\_ and variance \_\_\_\_\_\_\_\_ (or SD \_\_\_\_\_\_\_\_). Hint: See the slide that gives several version of the CLT, and use the one that tells you what the sum converges to.
+\end{Exercise}
+
+##
+
+\begin{Exercise}
+Suppose we have 1,000 draws (w/ replacement) from a hat with tickets numbered 1, 2, 3, 3, 3, and 8. The sum approximately follows a \_\_\_\_\_\_\_\_ distribution with mean \_\_\_\_\_\_\_\_ and variance \_\_\_\_\_\_\_\_ (or SD \_\_\_\_\_\_\_\_). The average approximately follows a \_\_\_\_\_\_\_\_ distribution with mean \_\_\_\_\_\_\_\_ and variance \_\_\_\_\_\_\_\_ (or SD \_\_\_\_\_\_\_\_).
+\end{Exercise}
+
+## 
+
+\begin{Exercise}
+Compare the formal ideas from the notes to FPP's box model from ch. 16-18. In what ways are they similar? In what ways are they different? Be especially sure to (A) compare drawing (once) from a box to a pmf/pdf and (B) compare the two versions of the central limit theorem. 
+\end{Exercise}
 
 
