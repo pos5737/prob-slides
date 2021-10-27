@@ -1,0 +1,13 @@
+---
+title: "Probability and Inference"
+output:
+  beamer_presentation:
+    includes:
+      in_header: "src/preamble.tex"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+```

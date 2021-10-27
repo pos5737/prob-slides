@@ -108,7 +108,7 @@ Prove Theorem \ref{thm:empty-zero}. Hint: Use Axiom \ref{axm:3}.
 
 **Solution**
 
-<!-- $\Pr(\emptyset) = \Pr(\cup_{i = 1}^\infty \emptyset) = \sum_{i = 1}^\infty \Pr(\emptyset)$. $\Pr(\emptyset) = \sum_{i = 1}^\infty \Pr(\emptyset)$ iff $\Pr(\emptyset) = 0$.} -->
+ $\Pr(\emptyset) = \Pr(\cup_{i = 1}^\infty \emptyset) = \sum_{i = 1}^\infty \Pr(\emptyset)$. $\Pr(\emptyset) = \sum_{i = 1}^\infty \Pr(\emptyset)$ iff $\Pr(\emptyset) = 0$.} 
 
 ##
 
@@ -142,7 +142,7 @@ Prove Theorem \ref{thm:monotonicity}. Hint: Notice that $B = A \cup (B \cap A^c)
 
 **Solution**
 
-<!--- $B = A \cup (B \cap A^c)$. By the addition rule for disjoint events, $\Pr(B) = \Pr(A) + \Pr(B \cap A^c)$. By Axiom 1, $\Pr(B \cap A^c) \geq 0$, so $\Pr(A) \leq \Pr(B)$. -->
+- $B = A \cup (B \cap A^c)$. By the addition rule for disjoint events, $\Pr(B) = \Pr(A) + \Pr(B \cap A^c)$. By Axiom 1, $\Pr(B \cap A^c) \geq 0$, so $\Pr(A) \leq \Pr(B)$. 
 
 ##
 
@@ -156,7 +156,7 @@ Prove Theorem \ref{thm:bounds}. Hint: Axiom \ref{axm:1} established that $0 \leq
 
 **Solution**
 
-<!-- $A \subseteq S$. $\Pr(A) \leq \Pr(S)$. By Axiom 1, $\Pr(S) = 1$, so $\Pr(A) \leq 1$. -->
+ $A \subseteq S$. $\Pr(A) \leq \Pr(S)$. By Axiom 1, $\Pr(S) = 1$, so $\Pr(A) \leq 1$. 
 
 ##
 
@@ -183,7 +183,7 @@ If they answer honestly and accurately, a randomly selected survey respondent wi
 
 **Solution**
 
-<!-- $\Pr(S) = \Pr(A) + \Pr(A^c)$. Then $1 = \Pr(A) + \Pr(A^c)$ and $\Pr(A^c) =  1-  \Pr(A)$. Then $\Pr(\text{non-voter}) = 0.4$. -->
+ $\Pr(S) = \Pr(A) + \Pr(A^c)$. Then $1 = \Pr(A) + \Pr(A^c)$ and $\Pr(A^c) =  1-  \Pr(A)$. Then $\Pr(\text{non-voter}) = 0.4$. 
 
 ##
 
@@ -193,7 +193,7 @@ Suppose events $A$ and $B$, where $\Pr(A) = 0.5$ and $\Pr(B) = 0.8$. Without mor
 
 **Solution**
 
-<!-- Remember that $\Pr(A \cap B) = \Pr(A)\Pr(B \mid A)$. Because $A$ is smaller than $B$, it could be that all of $A$ is inside $B$, in which case $\Pr(B \mid A) = 1$ and $\Pr(A \cap B) = \Pr(A) = 0.5$. Or it could be that $\Pr(B \mid A^c) = 1$, in which case $\Pr(B \cap A^c) = \Pr(B \mid A^c) \Pr(A^c) = 1 \times 0.5 = 0.5$. Then $\Pr(B) = \Pr(B \cap A^c) + \Pr(B \cap A) = 0.8$, according to the Addition Rule for Disjoint Events (that's a "partition, see below). So we have $.5 + \Pr(B \cap A)  = 0.8$ or $\Pr(B \cap A) = 0.3$. -->
+ Remember that $\Pr(A \cap B) = \Pr(A)\Pr(B \mid A)$. Because $A$ is smaller than $B$, it could be that all of $A$ is inside $B$, in which case $\Pr(B \mid A) = 1$ and $\Pr(A \cap B) = \Pr(A) = 0.5$. Or it could be that $\Pr(B \mid A^c) = 1$, in which case $\Pr(B \cap A^c) = \Pr(B \mid A^c) \Pr(A^c) = 1 \times 0.5 = 0.5$. Then $\Pr(B) = \Pr(B \cap A^c) + \Pr(B \cap A) = 0.8$, according to the Addition Rule for Disjoint Events (that's a "partition, see below). So we have $.5 + \Pr(B \cap A)  = 0.8$ or $\Pr(B \cap A) = 0.3$. 
 
 ##
 
@@ -267,7 +267,7 @@ Simplify $\Pr(A \mid B)$ for the following scenarios. Connect your answers to th
 
 **Solution**
 
-<!-- (1) $\Pr(A)/\Pr(B)$, (2) 0, (3) not defined, (4) $\Pr(A)\Pr(B)$ -->
+ (1) $\Pr(A)/\Pr(B)$, (2) 0, (3) not defined, (4) $\Pr(A)\Pr(B)$ 
 
 ##
 
@@ -277,7 +277,7 @@ Voting is a habit. Suppose that elections occur every four years and a hypotheti
 
 **Solution**
 
-<!-- $0.5 \times 0.8 \times 0.8$; $0.5 \times 0.7 \times 0.7$; the sum of the two previous -->
+ $0.5 \times 0.8 \times 0.8$; $0.5 \times 0.7 \times 0.7$; the sum of the two previous 
 
 
 ## 
@@ -303,7 +303,7 @@ Suppose $A$ and $B$ are independent and $\Pr(B) < 1$. Find $\Pr(A^c | B^c)$ in t
 \end{Exercise}
 
 **Solution**
-<!--
+
 \scriptsize
 
 First, show that $A^c$ and $B^c$ are independent. 
@@ -318,7 +318,7 @@ First, show that $A^c$ and $B^c$ are independent.
 \end{align*}
 
 Then, by independence, we know that $\Pr(A^c | B^c) = \Pr(A^c)$ and that $\Pr(A^c) = 1 - \Pr(A)$.
--->
+
 
 
 ##
@@ -329,9 +329,9 @@ Suppose $A$ and $B$ are events and $\Pr(B) = 0$. ($A$ is any event.) Find $\Pr(A
 \end{Exercise}
 
 **Solution**
-<!--
+
 If $A$ and $B$ are independent, then $\Pr(A \cap B) = \Pr(A) \Pr(B)$. Well, if $\Pr(B) = 0$, then $\Pr(A \cap B)$ must be zero. If the chance of $B$ is zero, then the chance of $A$ and $B$ is zero. Thus the two sides are equal and therefore independent.
--->
+
 
 ##
 
@@ -345,9 +345,9 @@ Suppose a six-die is rolled 10 times. What's the probability of...
 \end{Exercise}
 
 **Solution**
-<!--
+
 (1) $(1/6)^{10}$, (2) $1 - (1/6)^{10}$, (3) $(5/6)^{10}$
--->
+
 
 ##
 

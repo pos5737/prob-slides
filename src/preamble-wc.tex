@@ -1,0 +1,107 @@
+
+\usepackage{exercise}
+
+% math packages
+\usepackage{amssymb}
+
+% theme
+%\usetheme{Darmstadt}
+%\usecolortheme{seagull}
+%\usefonttheme{default}
+
+% make the title BIG
+\setbeamerfont{title}{series=\bfseries,size=\Huge, parent=structure}
+
+% remove the side title header
+\setbeamertemplate{headline}{}
+
+%gets rid of bottom navigation bars
+\setbeamertemplate{footline}{}
+
+%gets rid of navigation symbols
+%\setbeamertemplate{navigation symbols}{}
+
+% define "head" commands for transitions
+\newcommand{\headone}{\centering \bf \Huge}
+\newcommand{\headtwo}{\centering \bf \LARGE}
+\newcommand{\headthree}{\centering \bf \Large}
+
+% define a "spaceit" command for spacing between paragraphs
+\newcommand{\spaceit}{\vspace{10mm}}
+
+% define a "red" command to make text red.
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+
+% simply the style of the lists
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+% increase the default spacing between equations
+\setlength{\jot}{5pt}
+
+% custom color for "blockcode"
+\usepackage{fancyvrb,color}
+
+\DefineVerbatimEnvironment{blockcode}
+  {Verbatim}
+  {formatcom=\color{blue}}
+  
+% \usepackage{mdframed}
+% \mdtheorem{thm}{Theorem}
+%  
+%  \mdtheorem{lem}[thm]{Lemma}
+%  \mdtheorem{dfn}[thm]{Definition}
+%  \mdtheorem{cor}[thm]{Corollary}
+%  \mdtheorem{axm}[thm]{Axiom}
+%  \mdtheorem{exa}[thm]{Example}
+%  \mdtheorem{exr}{Exercise Set}
+
+\setbeamertemplate{theorems}[numbered]
+ \newtheorem{thm}{Theorem}
+ \newtheorem{lem}{Lemma}
+ \newtheorem{dfn}{Definition}
+ \newtheorem{cor}{Corollary}
+ \newtheorem{axm}{Axiom}
+ \newtheorem{exa}{Example}
+ \newtheorem{exr}{Exercise Set}
+ 
+ \usepackage[framemethod=TikZ]{mdframed}
+ 
+
+% \newcommand{\blocktheorem}[1]{%
+%   \csletcs{old#1}{#1}% Store \begin
+%   \csletcs{endold#1}{end#1}% Store \end
+%   \RenewDocumentEnvironment{#1}{o}
+%     {\par\addvspace{0.5ex}
+%      \noindent\begin{minipage}{\textwidth}
+%      \IfNoValueTF{##1}
+%        {\csuse{old#1}}
+%        {\csuse{old#1}[##1]}}
+%     {\csuse{endold#1}
+%      \end{minipage}
+%      \par\addvspace{0.5ex}}
+% }
+% 
+%  \raggedbottom
+% % 
+%  \blocktheorem{thm}% Make theo into a block
+%  \blocktheorem{dfn}% Make defi into a block
+%  \blocktheorem{lem}% Make lem into a block
+%  \blocktheorem{cor}% Make rem into a block
+%  \blocktheorem{axm}% Make col into a block
+%  \blocktheorem{exa}
+%  \blocktheorem{exr}
+
+% 
+% \newenvironment{proof}[1][Proof]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+% \newenvironment{remark}[1][Remark]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+% 
+% \DeclareMathOperator*{\argmin}{arg\,min}
+% \DeclareMathOperator{\med}{med}
+% \DeclareMathOperator*{\E}{\text{E}}
+% %\DeclareMathOperator*{\Pr}{\text{Pr}}
+
