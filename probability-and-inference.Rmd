@@ -237,7 +237,7 @@ If event $A$ happens, you win \$100. You see that event $B$ happens. Are you now
 ##
 
 \begin{thm}[Multiplication Rule for Two Events]
-For events $A$ and $B$, $\Pr(A \cap B) = \Pr(B)\Pr(A | B)$ if $\Pr(B > 0)$. Similarly, $\Pr(A \cap B) = \Pr(A)\Pr(B | A)$ if $\Pr(A > 0)$.
+For events $A$ and $B$, $\Pr(A \cap B) = \Pr(B)\Pr(A | B)$ if $\Pr(B) > 0$. Similarly, $\Pr(A \cap B) = \Pr(A)\Pr(B | A)$ if $\Pr(A) > 0$.
 \end{thm}
 
 ##
@@ -336,7 +336,7 @@ If $A$ and $B$ are independent, then $\Pr(A \cap B) = \Pr(A) \Pr(B)$. Well, if $
 ##
 
 \begin{Exercise}
-Suppose a six-die is rolled 10 times. What's the probability of...
+Suppose a six-sided die is rolled 10 times. What's the probability of...
   \begin{enumerate}
   \item all sixes?
   \item not all-sixes?
